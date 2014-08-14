@@ -1,0 +1,60 @@
+LIST(APPEND WebKit_INCLUDE_DIRECTORIES
+    "${WEBCORE_DIR}/page/win"
+    "${WEBCORE_DIR}/platform/graphics/wince"
+    "${WEBCORE_DIR}/platform/network/win"
+    "${WEBCORE_DIR}/platform/win"
+    "${CMAKE_SOURCE_DIR}/3rdparty/sqlite"
+
+    wincecasqt
+    wincecasqt/WebCoreSupport
+)
+
+LIST(APPEND WebKit_SOURCES
+    wincecasqt/WebView.h
+    wincecasqt/WebView.cpp
+
+    wincecasqt/WebCoreSupport/ChromeClientWinCE.h
+    wincecasqt/WebCoreSupport/ChromeClientWinCE.cpp
+    wincecasqt/WebCoreSupport/ContextMenuClientWinCE.h
+    wincecasqt/WebCoreSupport/ContextMenuClientWinCE.cpp
+    wincecasqt/WebCoreSupport/DragClientWinCE.h
+    wincecasqt/WebCoreSupport/DragClientWinCE.cpp
+    wincecasqt/WebCoreSupport/EditorClientWinCE.h
+    wincecasqt/WebCoreSupport/EditorClientWinCE.cpp
+    wincecasqt/WebCoreSupport/FrameLoaderClientWinCE.h
+    wincecasqt/WebCoreSupport/FrameLoaderClientWinCE.cpp
+    wincecasqt/WebCoreSupport/FrameNetworkingContextWinCE.h
+    wincecasqt/WebCoreSupport/FrameNetworkingContextWinCE.cpp
+    wincecasqt/WebCoreSupport/InspectorClientWinCE.h
+    wincecasqt/WebCoreSupport/InspectorClientWinCE.cpp
+    wincecasqt/WebCoreSupport/PlatformStrategiesWinCE.h
+    wincecasqt/WebCoreSupport/PlatformStrategiesWinCE.cpp
+)
+
+SET(WinCELauncher_SOURCES
+    wincecasqt/main.cpp
+    wincecasqt/resource.h
+    wincecasqt/WebKit.ico
+    wincecasqt/WebKit.rc
+)
+
+SET(WinCELauncher_LIBRARIES
+    ${WebKit_LIBRARY_NAME}
+)
+
+SET(WebKit_LIBRARY_TYPE STATIC)
+
+ADD_EXECUTABLE(WinCELauncher ${WinCELauncher_SOURCES})
+TARGET_LINK_LIBRARIES(WinCELauncher ${WinCELauncher_LIBRARIES})
+
+SET(iReader_SOURCES
+    wincecasqt/iReader/iReader.cpp
+    wincecasqt/iReader/PostilMaker.cpp
+    wincecasqt/iReader/resource.h
+    wincecasqt/iReader/iReader.ico
+    wincecasqt/iReader/iReader.rc
+    wincecasqt/iReader/CppSQLite3U.cpp
+)
+
+ADD_EXECUTABLE(iReader ${iReader_SOURCES})
+TARGET_LINK_LIBRARIES(iReader ${WinCELauncher_LIBRARIES})

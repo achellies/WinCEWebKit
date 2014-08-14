@@ -1,0 +1,142 @@
+LIST(APPEND WebCore_INCLUDE_DIRECTORIES
+  "${JAVASCRIPTCORE_DIR}/wtf/text"
+  "${WEBCORE_DIR}/platform/winceonwindows"
+  "${WEBCORE_DIR}/platform/text/casqt"
+  "${WEBCORE_DIR}/platform/graphics/winceonwindows"
+  "${WEBCORE_DIR}/platform/network/win"
+  "${WEBCORE_DIR}/plugins/winceonwindows"
+  "${WEBCORE_DIR}/page/wince"
+  "${WEBCORE_DIR}/page/win"
+  "${CMAKE_SOURCE_DIR}/3rdparty/libjpeg"
+  "${CMAKE_SOURCE_DIR}/3rdparty/libpng"
+  "${CMAKE_SOURCE_DIR}/3rdparty/libxml2/include"
+  "${CMAKE_SOURCE_DIR}/3rdparty/zlib"
+  "${CMAKE_SOURCE_DIR}/3rdparty/casqt"
+  "${CMAKE_SOURCE_DIR}/3rdparty/sqlite"
+  "${WEBCORE_DIR}/platform/wince"
+  "${WEBCORE_DIR}/platform/win"
+  "${WEBCORE_DIR}/platform/graphics/wince"
+  "${WEBCORE_DIR}/platform/graphics/win"
+  "${WEBCORE_DIR}/plugins/win"      
+)
+
+LIST(APPEND WebCore_SOURCES
+    bindings/js/ScriptControllerWin.cpp
+
+    page/win/DragControllerWin.cpp
+    page/win/EventHandlerWin.cpp
+    page/wince/FrameWinCE.cpp
+
+    loader/icon/IconDatabaseNone.cpp
+
+    rendering/RenderThemeWince.cpp
+
+    plugins/PluginDatabase.cpp
+
+    plugins/winceonwindows/PluginDatabaseWin.cpp
+
+    platform/Cursor.cpp
+    platform/LocalizedStrings.cpp
+    platform/PlatformStrategies.cpp
+    platform/ScrollAnimatorWin.cpp
+
+    platform/winceonwindows/BitmapInfo.cpp
+    platform/winceonwindows/ClipboardUtilitiesWin.cpp
+    platform/winceonwindows/ClipboardWin.cpp
+    platform/winceonwindows/ContextMenuItemWin.cpp
+    platform/winceonwindows/ContextMenuWin.cpp
+    platform/winceonwindows/CursorWin.cpp
+    platform/winceonwindows/EditorWin.cpp
+    platform/winceonwindows/KeyEventWin.cpp
+    platform/winceonwindows/LanguageWin.cpp
+    platform/winceonwindows/PasteboardWin.cpp
+    platform/winceonwindows/PopupMenuWin.cpp
+    platform/winceonwindows/PlatformMouseEventWin.cpp
+    platform/winceonwindows/PlatformScreenWin.cpp
+    platform/winceonwindows/ScrollbarThemeWin.cpp
+    platform/winceonwindows/SearchPopupMenuWin.cpp
+    platform/winceonwindows/SharedBufferWin.cpp
+    platform/winceonwindows/SoundWin.cpp
+    platform/winceonwindows/SystemInfo.cpp
+    platform/winceonwindows/SystemTimeWin.cpp
+    platform/winceonwindows/WCDataObject.cpp
+    platform/winceonwindows/WebCoreInstanceHandle.cpp
+    platform/winceonwindows/WidgetWin.cpp
+    platform/winceonwindows/WheelEventWin.cpp
+
+    platform/winceonwindows/DragDataWince.cpp
+    platform/winceonwindows/DragImageWince.cpp
+    platform/winceonwindows/FileChooserWince.cpp
+    platform/winceonwindows/FileSystemWince.cpp
+    platform/winceonwindows/KeygenWince.cpp
+    platform/winceonwindows/KURLWince.cpp
+    platform/winceonwindows/MIMETypeRegistryWince.cpp
+    platform/winceonwindows/SharedTimerWince.cpp
+    platform/winceonwindows/TemporaryLinkStubs.cpp
+
+    platform/network/win/CookieJarWin.cpp
+    platform/network/win/NetworkStateNotifierWin.cpp
+    platform/network/win/ResourceHandleWin.cpp
+
+    platform/graphics/opentype/OpenTypeUtilities.cpp
+
+    platform/graphics/winceonwindows/GDIExtras.cpp
+    platform/graphics/winceonwindows/IconWin.cpp
+    platform/graphics/winceonwindows/ImageWin.cpp
+    platform/graphics/winceonwindows/IntPointWin.cpp
+    platform/graphics/winceonwindows/IntRectWin.cpp
+    platform/graphics/winceonwindows/IntSizeWin.cpp
+
+    platform/graphics/winceonwindows/ColorWince.cpp
+    platform/graphics/winceonwindows/FontCacheWince.cpp
+    platform/graphics/winceonwindows/FontCustomPlatformData.cpp
+    platform/graphics/winceonwindows/FontPlatformData.cpp
+    platform/graphics/winceonwindows/FontWince.cpp
+    platform/graphics/winceonwindows/GlyphPageTreeNodeWince.cpp
+    platform/graphics/winceonwindows/GradientWince.cpp
+    platform/graphics/winceonwindows/GraphicsContextWince.cpp
+    platform/graphics/winceonwindows/ImageBufferWince.cpp
+    platform/graphics/winceonwindows/ImageWinCE.cpp
+    platform/graphics/winceonwindows/PathWince.cpp
+    platform/graphics/winceonwindows/PlatformPathWince.cpp
+    platform/graphics/winceonwindows/SharedBitmap.cpp
+    platform/graphics/winceonwindows/SimpleFontDataWince.cpp
+
+    platform/text/TextEncodingDetectorNone.cpp
+
+    platform/text/casqt/TextBoundariesIFQ.cpp
+    platform/text/casqt/TextBreakIteratorIFQ.cpp
+    platform/text/casqt/TextCodecCasQt.cpp
+)
+
+LIST(APPEND WebCore_LIBRARIES
+    libjpeg
+    libpng
+    libxml2
+    casqt
+    sqlite
+    crypt32
+    iphlpapi
+    wininet
+)
+
+IF(ENABLE_WINCEONWINDOWS)
+    LIST(APPEND WebCore_LIBRARIES
+        version
+        winmm
+        msimg32
+    )
+ENDIF()
+
+
+IF (ENABLE_NETSCAPE_PLUGIN_API)
+    LIST(APPEND WebCore_SOURCES
+        plugins/winceonwindows/PluginMessageThrottlerWin.cpp
+        plugins/winceonwindows/PluginPackageWin.cpp
+        plugins/winceonwindows/PluginViewWin.cpp
+    )
+ELSE ()
+    LIST(APPEND WebCore_SOURCES
+        plugins/PluginPackage.cpp
+    )
+ENDIF ()

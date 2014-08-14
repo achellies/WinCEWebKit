@@ -1,0 +1,47 @@
+LIST(APPEND WebKit_INCLUDE_DIRECTORIES
+    "${WEBCORE_DIR}/page/win"
+    "${WEBCORE_DIR}/platform/graphics/wince"
+    "${WEBCORE_DIR}/platform/network/win"
+    "${WEBCORE_DIR}/platform/win"
+
+    wince
+    wince/WebCoreSupport
+)
+
+LIST(APPEND WebKit_SOURCES
+    wince/WebView.h
+    wince/WebView.cpp
+
+    wince/WebCoreSupport/ChromeClientWinCE.h
+    wince/WebCoreSupport/ChromeClientWinCE.cpp
+    wince/WebCoreSupport/ContextMenuClientWinCE.h
+    wince/WebCoreSupport/ContextMenuClientWinCE.cpp
+    wince/WebCoreSupport/DragClientWinCE.h
+    wince/WebCoreSupport/DragClientWinCE.cpp
+    wince/WebCoreSupport/EditorClientWinCE.h
+    wince/WebCoreSupport/EditorClientWinCE.cpp
+    wince/WebCoreSupport/FrameLoaderClientWinCE.h
+    wince/WebCoreSupport/FrameLoaderClientWinCE.cpp
+    wince/WebCoreSupport/FrameNetworkingContextWinCE.h
+    wince/WebCoreSupport/FrameNetworkingContextWinCE.cpp
+    wince/WebCoreSupport/InspectorClientWinCE.h
+    wince/WebCoreSupport/InspectorClientWinCE.cpp
+    wince/WebCoreSupport/PlatformStrategiesWinCE.h
+    wince/WebCoreSupport/PlatformStrategiesWinCE.cpp
+)
+
+SET(WinCELauncher_SOURCES
+    wince/main.cpp
+    wince/resource.h
+    wince/WebKit.ico
+    wince/WebKit.rc
+)
+
+SET(WinCELauncher_LIBRARIES
+    ${WebKit_LIBRARY_NAME}
+)
+
+SET(WebKit_LIBRARY_TYPE STATIC)
+
+ADD_EXECUTABLE(WinCELauncher ${WinCELauncher_SOURCES})
+TARGET_LINK_LIBRARIES(WinCELauncher ${WinCELauncher_LIBRARIES})

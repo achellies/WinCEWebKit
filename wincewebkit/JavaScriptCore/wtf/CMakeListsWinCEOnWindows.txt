@@ -1,0 +1,23 @@
+LIST(APPEND WTF_HEADERS
+    unicode/wince/UnicodeWinCE.h
+
+    wince/FastMallocWince.h
+
+    ../../3rdparty/ce-compat/ce_time.h
+    ../../3rdparty/ce-compat/ce_unicode.h
+)
+
+LIST(APPEND WTF_SOURCES
+    TCSystemAlloc.cpp
+    ThreadingWin.cpp
+    ThreadSpecificWin.cpp
+
+    unicode/CollatorDefault.cpp
+    unicode/wince/UnicodeWinCE.cpp
+
+    win/MainThreadWin.cpp
+    win/OwnPtrWin.cpp
+
+    ../../3rdparty/ce-compat/ce_time.c
+    ../../3rdparty/ce-compat/ce_unicode.cpp
+)

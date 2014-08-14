@@ -1,0 +1,60 @@
+LIST(APPEND WebKit_INCLUDE_DIRECTORIES
+    "${WEBCORE_DIR}/page/win"
+    "${WEBCORE_DIR}/platform/graphics/winceonwindows"
+    "${WEBCORE_DIR}/platform/network/win"
+    "${WEBCORE_DIR}/platform/winceonwindows"
+    "${CMAKE_SOURCE_DIR}/3rdparty/sqlite"
+
+    winceonwindows
+    winceonwindows/WebCoreSupport
+)
+
+LIST(APPEND WebKit_SOURCES
+    winceonwindows/WebView.h
+    winceonwindows/WebView.cpp
+
+    winceonwindows/WebCoreSupport/ChromeClientWinCE.h
+    winceonwindows/WebCoreSupport/ChromeClientWinCE.cpp
+    winceonwindows/WebCoreSupport/ContextMenuClientWinCE.h
+    winceonwindows/WebCoreSupport/ContextMenuClientWinCE.cpp
+    winceonwindows/WebCoreSupport/DragClientWinCE.h
+    winceonwindows/WebCoreSupport/DragClientWinCE.cpp
+    winceonwindows/WebCoreSupport/EditorClientWinCE.h
+    winceonwindows/WebCoreSupport/EditorClientWinCE.cpp
+    winceonwindows/WebCoreSupport/FrameLoaderClientWinCE.h
+    winceonwindows/WebCoreSupport/FrameLoaderClientWinCE.cpp
+    winceonwindows/WebCoreSupport/FrameNetworkingContextWinCE.h
+    winceonwindows/WebCoreSupport/FrameNetworkingContextWinCE.cpp
+    winceonwindows/WebCoreSupport/InspectorClientWinCE.h
+    winceonwindows/WebCoreSupport/InspectorClientWinCE.cpp
+    winceonwindows/WebCoreSupport/PlatformStrategiesWinCE.h
+    winceonwindows/WebCoreSupport/PlatformStrategiesWinCE.cpp
+)
+
+SET(WinCELauncher_SOURCES
+    winceonwindows/main.cpp
+    winceonwindows/resource.h
+    winceonwindows/WebKit.ico
+    winceonwindows/WebKit.rc
+)
+
+SET(WinCELauncher_LIBRARIES
+    ${WebKit_LIBRARY_NAME}
+)
+
+SET(WebKit_LIBRARY_TYPE STATIC)
+
+ADD_EXECUTABLE(WinCELauncher ${WinCELauncher_SOURCES})
+TARGET_LINK_LIBRARIES(WinCELauncher ${WinCELauncher_LIBRARIES})
+
+SET(iReader_SOURCES
+    winceonwindows/iReader/iReader.cpp
+    winceonwindows/iReader/PostilMaker.cpp
+    winceonwindows/iReader/resource.h
+    winceonwindows/iReader/iReader.ico
+    winceonwindows/iReader/iReader.rc
+    winceonwindows/iReader/CppSQLite3U.cpp
+)
+
+ADD_EXECUTABLE(iReader ${iReader_SOURCES})
+TARGET_LINK_LIBRARIES(iReader ${WinCELauncher_LIBRARIES})
